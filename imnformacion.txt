@@ -1,0 +1,68 @@
+Para crear un proyecto con las ultimas versiones realiza estos pasos:
+
+
+
+Esto crea un proyecto con el empaquetador de vite en vez de react-create-app
+
+npm create vite@latest my-project -- --template react
+cd my-project
+
+
+
+
+Luego para instalar tailwindcss en tu proyecto sigue estos pasos:
+
+https://tailwindcss.com/docs/guides/vite
+
+
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+
+tailiwnd.config.js
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+index.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+A todos que implementa tailwindcss de esta forma le aparece esta advertencia pero ignoraras. Ahora bien ubícate en tu archivo .eslintrc y en el apartado de rules remplázalo por esto:
+
+
+
+rules: {
+    'react-refresh/only-export-components': 'warn',
+    'no-unused-vars': 'warn',
+    'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'no-undef': 'off'
+  }
+
+
+Tambien para evitar dobles renderizados en tu archivo main.jsx remplazalo por este:
+
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+ 
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+
+Luego arranca tu app con :
+
+npm run dev
